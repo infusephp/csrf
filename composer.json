@@ -1,0 +1,30 @@
+{
+	"name": "infuse/csrf",
+	"description": "Anti-CSRF module for Infuse Framework",
+	"type": "library",
+	"keywords": ["infuse","framework","csrf","security"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "jaredtking",
+			"email": "j@jaredtking.com",
+			"homepage": "http://jaredtking.com"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/infusephp/csrf/issues",
+		"source": "https://github.com/infusephp/csrf"
+	},
+    "autoload": {
+        "psr-4": {"Infuse\\Csrf\\": "src/"}
+    },
+	"require": {
+		"php": ">=5.4.0",
+		"symfony/security-csrf": "~2.8|~3.0"
+	},
+	"require-dev": {
+		"infuse/infuse": "~1.4",
+		"mockery/mockery": "~0.9",
+		"satooshi/php-coveralls": "~1.0"
+	}
+}
