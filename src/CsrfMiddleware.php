@@ -32,7 +32,7 @@ class CsrfMiddleware
     /**
      * @var string
      */
-    private $prefix;
+    private $prefix = 'csrf';
 
     /**
      * @var bool
@@ -45,11 +45,13 @@ class CsrfMiddleware
     private $enabled = true;
 
     /**
-     * @var string $prefix
+     * @var string|null $prefix
      */
-    public function __construct($prefix = 'csrf')
+    public function __construct($prefix = null)
     {
-        $this->prefix = $prefix;
+        if ($prefix !== null) {
+            $this->prefix = $prefix;
+        }
     }
 
     public function __invoke($req, $res, $next)

@@ -20,6 +20,7 @@ class CsrfMiddlewareTest extends PHPUnit_Framework_TestCase
     public function testDI()
     {
         $this->assertInstanceOf('Infuse\Csrf\CsrfMiddleware', Test::$app['csrf']);
+        $this->assertEquals('csrftest_id', Test::$app['csrf']->getTokenIdKey());
         $this->assertInstanceOf('Symfony\Component\Security\Csrf\CsrfTokenManager', Test::$app['csrf_tokens']);
     }
 
@@ -38,6 +39,9 @@ class CsrfMiddlewareTest extends PHPUnit_Framework_TestCase
     {
         $middleware = $this->getMiddleware();
         $this->assertEquals('csrf_test_id', $middleware->getTokenIdKey());
+
+        $middleware = new CsrfMiddleware();
+        $this->assertEquals('csrf_id', $middleware->getTokenIdKey());
     }
 
     function testGetTokenValueKey()

@@ -14,6 +14,9 @@ return  [
   'app' => [
     'hostname' => 'example.com'
   ],
+  'csrf' => [
+  	'prefix' => 'csrftest',
+  ],
   'services' => [
     'csrf' => 'Infuse\Csrf\Csrf',
     'csrf_tokens' => 'Infuse\Csrf\CsrfTokens',

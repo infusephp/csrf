@@ -14,7 +14,8 @@ class Csrf
 {
     public function __invoke($app)
     {
-        $middleware = new CsrfMiddleware();
+    	$prefix = $app['config']->get('csrf.prefix');
+        $middleware = new CsrfMiddleware($prefix);
         $middleware->setApp($app);
 
         return $middleware;
