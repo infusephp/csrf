@@ -60,8 +60,9 @@ class CsrfMiddleware
         }
 
         // Check if CSRF protection is disabled for the route
-        $route = $this->app['routeInfo'][1];
-        if (isset($route[2]) && is_array($route[2]) && array_value($route[2], 'no_csrf')) {
+        $route = (array) array_value($this->app['routeInfo'], 1);
+        $params = (array) array_value($route, 2);
+        if (array_value($params, 'no_csrf')) {
             return $next($req, $res);
         }
 
