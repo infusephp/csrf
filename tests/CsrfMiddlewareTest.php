@@ -199,6 +199,22 @@ class CsrfMiddlewareTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(400, $res->getCode());
     }
 
+    function testHandleFailureCustom()
+    {
+        $req = new Request;
+        $res = new Response;
+
+        $middleware = $this->getMiddleware();
+        $middleware->onFailure(function($req, $res) {
+            return $res->setCode(500);
+        });
+
+        $res = $middleware->handleFailure($req, $res);
+        
+        $this->assertInstanceOf('Infuse\Response', $res);
+        $this->assertEquals(500, $res->getCode());
+    }
+
     function testInvokeDisabled()
     {
         $middleware = $this->getMiddleware();

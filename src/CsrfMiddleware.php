@@ -45,6 +45,11 @@ class CsrfMiddleware
     private $enabled = true;
 
     /**
+     * @var callable
+     */
+    private $failureCallable;
+
+    /**
      * @var string|null $prefix
      */
     public function __construct($prefix = null)
@@ -276,6 +281,19 @@ class CsrfMiddleware
     }
 
     /**
+     * Registers a custom failure handler.
+     *
+     * @param callable $handler
+     *
+     * @return self
+     */
+    function onFailure(callable $handler) {
+        $this->failureCallable = $handler;
+
+        return $this;
+    }
+
+    /**
      * Builds a response when the CSRF check fails.
      *
      * @param Request  $req
@@ -285,6 +303,10 @@ class CsrfMiddleware
      */
     public function handleFailure(Request $req, Response $res)
     {
+        if ($this->failureCallable) {
+            return call_user_func($this->failureCallable, $req, $res);
+        }
+
         if ($req->isJson()) {
             return $res->setCode(400)
                        ->json([
