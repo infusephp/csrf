@@ -204,7 +204,13 @@ class CsrfMiddleware
         $cookie = json_encode($params);
         $secure = $this->app['config']->get('app.ssl');
         $domain = '.'.$this->app['config']->get('app.hostname');
-        $res = $res->setCookie($this->getCookieName(), $cookie, 0, '/', $domain, $secure, false);
+        $res = $res->setCookie($this->getCookieName(),
+                               $cookie,
+                               0,
+                               '/',
+                               $domain,
+                               $secure,
+                               false);
 
         return [$req, $res];
     }
