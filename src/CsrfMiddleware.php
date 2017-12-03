@@ -229,7 +229,7 @@ class CsrfMiddleware
             $token = json_decode($header, true);
 
             if (is_array($token)) {
-                $id = array_value($token, $this->getTokenIdKey());
+                $id = array_value($token, $this->getTokenIdKey()) ?? '';
                 $value = array_value($token, $this->getTokenValueKey());
 
                 return new CsrfToken($id, $value);
@@ -237,7 +237,7 @@ class CsrfMiddleware
         }
 
         // fetch the token from the request body
-        $id = $req->request($this->getTokenIdKey());
+        $id = $req->request($this->getTokenIdKey()) ?? '';
         $value = $req->request($this->getTokenValueKey());
 
         return new CsrfToken($id, $value);
