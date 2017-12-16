@@ -12,10 +12,10 @@ use Infuse\Csrf\CsrfMiddleware;
 use Infuse\Request;
 use Infuse\Response;
 use Infuse\Test;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManager;
 
-class CsrfMiddlewareTest extends PHPUnit_Framework_TestCase
+class CsrfMiddlewareTest extends MockeryTestCase
 {
     public function testDI()
     {
